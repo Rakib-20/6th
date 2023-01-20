@@ -4,20 +4,20 @@
 #include<stdbool.h>
 #include<ctype.h>
 
-void commentAnalyzer(char* string);     // input string থেকে comment analyze করে
+void commentAnalyzer(char* string);     
 
 int main()
 {
-    char string[5000], c = ' ';         // c empty হিসেবে initialize করা
+    char string[5000], c = ' ';         
     printf("Enter a string: ");
     int x = 0;
-    while(c != '\n')                    // c যতক্ষন enter বা newline না পাবে, input নিতে থাকবে
+    while(c != '\n')                    
     {
         scanf("%c", &string[x]);
-        c = string[x];                   // c এর মধ্যে current character store করা
+        c = string[x];                   
         x++;
     }
-    string[x-1] = '\0';                 // input এর শেষে null character দিয়ে string বানিয়ে নেওয়া
+    string[x-1] = '\0';                 
 
     printf("\n\n\n\nComment Token:\n\n");
 
@@ -27,54 +27,54 @@ int main()
 
 void commentAnalyzer(char* string)
 {
-    int left = 0, right = 0;            // token এর শুরু শেষ track রাখে left, right
+    int left = 0, right = 0;            
     int length = strlen(string);
-    char str[500];                      // token গুলাকে store করার জন্য str array
+    char str[500];                      
 
     while(right < length)
     {
-        if(right+1 < length && string[right] == '/' && string[right+1] == '/')  // যদি ২টা forward slash (//) থাকে, তাহলে পরেরটুকু comment
+        if(right+1 < length && string[right] == '/' && string[right+1] == '/')  
         {
             right += 2;
-            left = right;       // comment শুরু হবে ২ position পরে থেকে
+            left = right;       
 
-            while(right < length)       // input string এর বাকিটুকু check করা
+            while(right < length)       
             {
-                if(right + 1 == length)             // যদি একেবারে input string এর শেষে চলে যায়,
+                if(right + 1 == length)             
                 {
-                    str[right-left] = string[right];    // তাহলে একেবারে শেষ পর্যন্ত comment, str এর মধ্যে last character টা store করা
+                    str[right-left] = string[right];    
                     break;
                 }
 
-                str[right-left] = string[right];        // str-এর মধ্যে character গুলা insert করা
+                str[right-left] = string[right];        
                 right++;
 
             }
-            str[right - left] = '\0';               // str এর ending mean করতে null character use
+            str[right - left] = '\0';               
 
 
-            printf("%s is a valid Comment.\n", str);        // comment print
+            printf("%s is a valid Comment.\n", str);        
 
             right++;
             left = right;
         }
-        else if(right+1 < length && string[right] == '/' && string[right+1] == '*') // যদি forward slash আর star থাকে, তাহলে multiline comment হবে
+        else if(right+1 < length && string[right] == '/' && string[right+1] == '*') 
         {
             right += 2;
-            left = right;       // comment শুরু হবে ২ position পরে থেকে
+            left = right;       
 
-            while(right < length)       // input string এর বাকিটুকু check করা
+            while(right < length)       
             {
-                if(right+1 < length && string[right] == '*' && string[right+1] == '/')  // যদি input string-এ star আর forward slash আসে, তাহলে break
+                if(right+1 < length && string[right] == '*' && string[right+1] == '/')  
                 {
                     break;
                 }
-                str[right-left] = string[right];            // যতক্ষন না (*/) আসে, ততক্ষন পর্যন্ত str এর মধ্যে character insert করা
+                str[right-left] = string[right];            
                 right++;
             }
-            str[right - left] = '\0';                   // str এর ending mean করতে null character use
+            str[right - left] = '\0';                   
 
-            printf("%s is a valid Comment.\n", str);         // comment print
+            printf("%s is a valid Comment.\n", str);         
         }
         else
         {
