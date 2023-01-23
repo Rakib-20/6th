@@ -1,0 +1,16 @@
+double x1 = 2.4, x2 = 12, x3 = 0.5;	// This is declaration
+string s = "Where are you?";
+
+/* This is a 
+   Multiline Comment.
+*/
+
+int i = 0;
+while(i < 10);
+{
+	double _ans = (x1 * x2 + x3) / 100;
+	printf("Hello World");
+}
+
+return 0;
+// This is a comment
